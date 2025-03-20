@@ -7,7 +7,7 @@ import Fireworks from "@components/Fireworks";
 import { JungleItems } from "./JungleItems";
 import cx from "classnames";
 import ConsoleLogViewer from "@components/ConsoleLogViewer";
-import { useDebugMode, useOrientation } from "@hooks/index";
+import { useDebugMode } from "@hooks/index";
 
 const DEBOUNCE_DELAY = 300;
 
@@ -22,7 +22,6 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [allowFireworks, setAllowFireworks] = useState(false);
   const [largeScreen, setLargeScreen] = useState(false);
-  const orientation = useOrientation();
   const debugMode = useDebugMode();
 
   const handleJunglePlacement = useCallback(() => {
@@ -67,8 +66,6 @@ const Home = () => {
 
   const checkLargeScreen = useCallback(() => {
     if (!contentRef.current) return;
-    if (prevWindowWidth.current === window.innerWidth) return;
-    prevWindowWidth.current = window.innerWidth;
     const contentWidth = contentRef.current.getBoundingClientRect().width;
     const screenWidth = window.innerWidth;
     if (screenWidth > contentWidth) {
@@ -108,12 +105,6 @@ const Home = () => {
       window.removeEventListener("resize", debouncedResize);
     };
   }, [debouncedResize]);
-
-  useEffect(() => {
-    console.log("orientation:", orientation);
-    handleJunglePlacement();
-    checkLargeScreen();
-  }, [orientation]);
 
   return (
     <>
