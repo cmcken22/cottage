@@ -135,6 +135,7 @@ const Home = () => {
         <div className={styles.debug}>
           <p>contentWidth: {contentWidth}</p>
           <p>screenWidth: {screenWidth}</p>
+          <p>innerWidth: {window.innerWidth}</p>
           <p>largeScreen: {largeScreen ? "true" : "false"}</p>
         </div>
         {allowFireworks && <Fireworks loop />}
