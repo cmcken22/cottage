@@ -2,40 +2,76 @@
   @apply flex justify-center;
 
   .content {
-    @apply bg-amber-300;
-    @apply w-full;
+    @apply w-full relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100dvh;
+    // background-image: url('/beach.png');
+    // background-image: url('/beach2.jpeg');
+    // background-repeat: no-repeat;
+    // background-size: cover;
     box-sizing: border-box;
-
-    margin: 16px; // 1rem = 16px
+    overflow: hidden;
 
     @media (min-width: 640px) {
-      @apply bg-red-500;
-      margin: 24px;
+      // @apply bg-red-500;
+      // margin: 24px;
       max-width: 384px;
     }
 
     @media (min-width: 768px) {
-      @apply bg-green-500;
-      margin: 32px;
+      // @apply bg-green-500;
+      // margin: 32px;
       max-width: 448px;
     }
 
     @media (min-width: 1024px) {
-      @apply bg-blue-500;
-      margin: 40px;
+      // @apply bg-blue-500;
+      // margin: 40px;
       max-width: 512px;
     }
 
     @media (min-width: 1280px) {
-      @apply bg-indigo-500;
-      margin: 48px;
+      // @apply bg-indigo-500;
+      // margin: 48px;
       max-width: 576px;
     }
 
     @media (min-width: 1536px) {
-      @apply bg-purple-500;
-      margin: 64px;
+      // @apply bg-purple-500;
+      // margin: 64px;
       max-width: 672px;
     }
+  }
+
+  .jungle {
+    background: rgba(255, 0, 255, 0.4);
+    @apply absolute top-[18%] left-0 right-0 bottom-0;
+  }
+
+  .leafContainer {
+    @apply absolute w-fit;
+    @apply right-0 top-[20px];
+  }
+
+  .leaf {
+    width: 100px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .leafShadow {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(4px) brightness(0) contrast(1.2); // Blur + darken
+    opacity: 0.5; // Adjust shadow darkness
+    transform: translate(4px, 4px); // Offset to simulate light source
+    z-index: 0;
+    pointer-events: none; // Prevent interaction with the shadow
   }
 }

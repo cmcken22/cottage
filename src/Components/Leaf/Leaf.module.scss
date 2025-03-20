@@ -1,0 +1,25 @@
+.leafContainer {
+  @apply absolute w-fit;
+  // @apply right-0 top-[20px];
+  
+  .leaf {
+    // width: 100px;
+    height: auto;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .shadow {
+    // width: 100px;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    filter: blur(4px) brightness(0) contrast(1.2); // Blur + darken
+    opacity: 0.5; // Adjust shadow darkness
+    transform: translate(4px, 4px); // Offset to simulate light source
+    z-index: 0;
+    pointer-events: none; // Prevent interaction with the shadow
+  }
+}
+
