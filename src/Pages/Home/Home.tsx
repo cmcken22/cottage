@@ -21,6 +21,7 @@ const Home = () => {
   const timerRef2 = useRef<NodeJS.Timeout>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [largeScreen, setLargeScreen] = useState(false);
+  const prevWindowWidth = useRef(0);
 
   const handleJunglePlacement = useCallback(() => {
     if (jungleRef.current && cardRef.current) {
@@ -63,6 +64,9 @@ const Home = () => {
 
   const checkLargeScreen = useCallback(() => {
     if (!contentRef.current) return;
+    if (prevWindowWidth.current === window.innerWidth) return;
+    prevWindowWidth.current = window.innerWidth;
+    console.log("checkLargeScreen");
     const contentWidth = contentRef.current.getBoundingClientRect().width;
     const screenWidth = window.screen.width;
     if (screenWidth > contentWidth) {
@@ -117,6 +121,9 @@ const Home = () => {
     };
   }, [debouncedLargeScreenCheck]);
 
+  const contentWidth = contentRef?.current?.getBoundingClientRect()?.width;
+  const screenWidth = window?.screen?.width;
+
   return (
     <>
       <div
@@ -124,6 +131,11 @@ const Home = () => {
           [styles["home--large"]]: largeScreen,
         })}
       >
+        <div className={styles.debug}>
+          <p>contentWidth: {contentWidth}</p>
+          <p>screenWidth: {screenWidth}</p>
+          <p>largeScreen: {largeScreen ? "true" : "false"}</p>
+        </div>
         {allowFireworks && <Fireworks loop />}
         <div
           ref={handleCreateContentRef}

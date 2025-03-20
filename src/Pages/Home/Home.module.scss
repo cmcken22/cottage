@@ -4,6 +4,10 @@
   &--large {
     @apply py-3;
   }
+
+  .debug {
+    @apply fixed top-0 left-0 z-50 p-2;
+  }
   
   .content {
     @apply w-full relative;
