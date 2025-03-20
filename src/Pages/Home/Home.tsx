@@ -3,8 +3,7 @@ import styles from "./Home.module.scss";
 import Leaf from "@components/Leaf";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
-import { useWindowSize } from "react-use";
-import Fireworks from "react-canvas-confetti/dist/presets/fireworks";
+import Fireworks from "@components/Fireworks";
 
 const DEBOUNCE_DELAY = 300;
 
@@ -15,7 +14,6 @@ const Home = () => {
   const loadedRefs = useRef<{ [key: string]: boolean }>({});
   const timerRef = useRef<NodeJS.Timeout>(null);
   const [loading, setLoading] = useState(true);
-  const { width, height } = useWindowSize();
 
   const handleJunglePlacement = useCallback(() => {
     if (jungleRef.current && cardRef.current) {
@@ -77,28 +75,7 @@ const Home = () => {
   return (
     <>
       <div className={styles.home}>
-        {!loading && (
-          <Fireworks
-            className={styles.fireworks}
-            autorun={{
-              speed: 1,
-              delay: 500,
-              duration: 2000,
-            }}
-            height={height}
-            width={width}
-            decorateOptions={(options) => {
-              console.log("options:", options);
-              return {
-                ...options,
-                shapes: ["square"],
-                colors: ["#ffffff"],
-                zIndex: 1000,
-              };
-            }}
-          />
-        )}
-        {/* <Confetti width={width} height={height} recycle={false} run={!loading} /> */}
+        {!loading && <Fireworks />}
         <div className={styles.content}>
           <Card ref={(r) => handleCreateRef(r, "card")} hidden />
           <AnimatePresence>
