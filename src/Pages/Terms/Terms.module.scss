@@ -2,7 +2,7 @@
   @apply flex justify-center;
 
   .content {
-    @apply w-full relative py-4;
+    @apply w-full relative py-4 px-3;
     min-height: 100dvh;
     box-sizing: border-box;
     overflow: hidden;
