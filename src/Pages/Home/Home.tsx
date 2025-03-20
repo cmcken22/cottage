@@ -19,7 +19,6 @@ const Home = () => {
   const timerRef = useRef<NodeJS.Timeout>(null);
   const [loading, setLoading] = useState(true);
   const [allowFireworks, setAllowFireworks] = useState(false);
-  const { width, height } = useWindowSize();
   const timerRef2 = useRef<NodeJS.Timeout>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const [largeScreen, setLargeScreen] = useState(false);
