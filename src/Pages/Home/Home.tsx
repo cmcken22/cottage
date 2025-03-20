@@ -6,9 +6,9 @@ import { AnimatePresence } from "framer-motion";
 import Fireworks from "@components/Fireworks";
 import { JungleItems } from "./JungleItems";
 import cx from "classnames";
+import ConsoleLogViewer from "@components/ConsoleLogViewer";
 
 const DEBOUNCE_DELAY = 300;
-const DEBOUNCE_DELAY2 = 300;
 
 const Home = () => {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -16,12 +16,11 @@ const Home = () => {
   const imageRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const loadedRefs = useRef<{ [key: string]: boolean }>({});
   const timerRef = useRef<NodeJS.Timeout>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const prevWindowWidth = useRef(0);
   const [loading, setLoading] = useState(true);
   const [allowFireworks, setAllowFireworks] = useState(false);
-  const timerRef2 = useRef<NodeJS.Timeout>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
   const [largeScreen, setLargeScreen] = useState(false);
-  const prevWindowWidth = useRef(0);
 
   const handleJunglePlacement = useCallback(() => {
     if (jungleRef.current && cardRef.current) {
@@ -70,7 +69,7 @@ const Home = () => {
     const contentWidth = contentRef.current.getBoundingClientRect().width;
     const screenWidth = window.innerWidth;
     if (screenWidth > contentWidth) {
-      console.log("too big!!!!!!", screenWidth, contentWidth);
+      console.log("too big!!!!!!", "sw:", screenWidth, "cw:", contentWidth);
     }
     setLargeScreen(screenWidth > contentWidth);
   }, [setLargeScreen]);
@@ -85,44 +84,31 @@ const Home = () => {
     [checkLargeScreen]
   );
 
-  const debouncedHandleJunglePlacement = useCallback(() => {
+  const debouncedResize = useCallback(() => {
+    if (prevWindowWidth.current === window.innerWidth) return;
+    prevWindowWidth.current = window.innerWidth;
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
     }
     timerRef.current = setTimeout(() => {
+      console.log("resize");
+      checkLargeScreen();
       handleJunglePlacement();
     }, DEBOUNCE_DELAY);
-  }, [handleJunglePlacement]);
-
-  const debouncedLargeScreenCheck = useCallback(() => {
-    if (timerRef2.current) {
-      clearTimeout(timerRef2.current);
-      timerRef2.current = null;
-    }
-    timerRef2.current = setTimeout(() => {
-      checkLargeScreen();
-    }, DEBOUNCE_DELAY2);
-  }, [checkLargeScreen]);
+  }, [checkLargeScreen, handleJunglePlacement]);
 
   useEffect(() => {
-    debouncedHandleJunglePlacement();
-    window.addEventListener("resize", debouncedHandleJunglePlacement);
+    debouncedResize();
+    window.addEventListener("resize", debouncedResize);
     return () => {
-      window.removeEventListener("resize", debouncedHandleJunglePlacement);
+      window.removeEventListener("resize", debouncedResize);
     };
-  }, [debouncedHandleJunglePlacement]);
-
-  useEffect(() => {
-    debouncedLargeScreenCheck();
-    window.addEventListener("resize", debouncedLargeScreenCheck);
-    return () => {
-      window.removeEventListener("resize", debouncedLargeScreenCheck);
-    };
-  }, [debouncedLargeScreenCheck]);
+  }, [debouncedResize]);
 
   return (
     <>
+      <ConsoleLogViewer />
       <div
         className={cx(styles.home, {
           [styles["home--large"]]: largeScreen,
