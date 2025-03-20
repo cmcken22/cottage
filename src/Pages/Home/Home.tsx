@@ -5,7 +5,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Fireworks from "@components/Fireworks";
 import { JungleItems } from "./JungleItems";
-import { useWindowSize } from "react-use";
 import cx from "classnames";
 
 const DEBOUNCE_DELAY = 300;
