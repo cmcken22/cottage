@@ -1,18 +1,28 @@
 .home {
   @apply flex justify-center;
 
+  &--large {
+    @apply py-3;
+  }
+  
   .content {
     @apply w-full relative;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100dvh;
-    // background-image: url('/beach.png');
-    // background-image: url('/beach2.jpeg');
-    // background-repeat: no-repeat;
-    // background-size: cover;
     box-sizing: border-box;
     overflow: hidden;
+    background-image: url('https://ik.imagekit.io/cmckenna/beach2.jpeg?updatedAt=1742442892752');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #88a799;
+
+    &--large {
+      border-radius: 8px;
+      box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.2);
+      min-height: calc(100dvh - 48px);
+    }
 
     @media (min-width: 640px) {
       // @apply bg-red-500;

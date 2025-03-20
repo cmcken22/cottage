@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  background-image: url('https://ik.imagekit.io/cmckenna/beach2.jpeg?updatedAt=1742442892752');
+body {
+  /* background-image: url('https://ik.imagekit.io/cmckenna/beach2.jpeg?updatedAt=1742442892752'); */
+  background-image: url('https://ik.imagekit.io/cmckenna/blurred-beach.jpg?updatedAt=1742452687269');
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   background-color: #88a799;
 }
