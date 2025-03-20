@@ -123,7 +123,7 @@ const Home = () => {
 
   const contentWidth = contentRef?.current?.getBoundingClientRect()?.width || 0;
   const screenWidth = window?.screen?.width || 0;
-  const lg = screenWidth > contentWidth;
+  const lg = window.innerWidth > contentWidth;
 
   return (
     <>
