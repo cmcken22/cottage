@@ -9,4 +9,5 @@ export interface LeafProps {
   flipY?: boolean;
   type?: string;
   zIndex?: number;
+  onLoad?: (e: unknown) => void;
 }

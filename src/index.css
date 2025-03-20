@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 html {
-  background-image: url('/beach2.jpeg');
+  background-image: url('https://ik.imagekit.io/cmckenna/beach2.jpeg?updatedAt=1742442892752');
   background-repeat: no-repeat;
   background-size: cover;
+  background-color: #88a799;
 }

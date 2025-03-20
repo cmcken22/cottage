@@ -11,4 +11,10 @@
   .text {
     @apply text-center;
   }
+
+  .button {
+    @apply w-fit p-1 rounded-sm;
+    @apply m-auto;
+    background: #88a799;
+  }
 }
