@@ -7,6 +7,7 @@ import Fireworks from "@components/Fireworks";
 import { JungleItems } from "./JungleItems";
 import cx from "classnames";
 import ConsoleLogViewer from "@components/ConsoleLogViewer";
+import { useDebugMode, useOrientation } from "@hooks/index";
 
 const DEBOUNCE_DELAY = 300;
 
@@ -21,6 +22,8 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [allowFireworks, setAllowFireworks] = useState(false);
   const [largeScreen, setLargeScreen] = useState(false);
+  const orientation = useOrientation();
+  const debugMode = useDebugMode();
 
   const handleJunglePlacement = useCallback(() => {
     if (jungleRef.current && cardRef.current) {
@@ -106,9 +109,15 @@ const Home = () => {
     };
   }, [debouncedResize]);
 
+  useEffect(() => {
+    console.log("orientation:", orientation);
+    handleJunglePlacement();
+    checkLargeScreen();
+  }, [orientation]);
+
   return (
     <>
-      <ConsoleLogViewer />
+      {debugMode && <ConsoleLogViewer />}
       <div
         className={cx(styles.home, {
           [styles["home--large"]]: largeScreen,

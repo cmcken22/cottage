@@ -10,6 +10,7 @@
       "@assets/*": ["src/Assets/*"],
       "@pages/*": ["src/Pages/*"],
       "@components/*": ["src/Components/*"],
+      "@hooks/*": ["src/Hooks/*"],
     },
     /* Bundler mode */
     // "moduleResolution": "bundler",
