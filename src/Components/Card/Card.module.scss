@@ -14,7 +14,21 @@
 
   .button {
     @apply w-fit p-1 rounded-sm;
-    @apply m-auto;
+    @apply ml-auto mr-auto mt-[24px];
     background: #88a799;
+  }
+
+  .flag {
+    @apply h-[69px];
+    @apply w-[120px];
+    @apply ml-auto mr-auto;
+    background-image: url("https://ik.imagekit.io/cmckenna/Flag_of_Mexico.png?updatedAt=1742445177343");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &--hidden {
+    @apply opacity-0;
+    position: absolute;
   }
 }

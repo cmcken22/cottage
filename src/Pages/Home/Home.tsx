@@ -1,14 +1,25 @@
 import Card from "@components/Card";
 import styles from "./Home.module.scss";
 import Leaf from "@components/Leaf";
-import { use, useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AnimatePresence } from "framer-motion";
+
+const DEBOUNCE_DELAY = 300;
 
 const Home = () => {
   const cardRef = useRef<HTMLDivElement>(null);
   const jungleRef = useRef<HTMLDivElement>(null);
   const imageRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const loadedRefs = useRef<{ [key: string]: boolean }>({});
+  const timerRef = useRef<NodeJS.Timeout>(null);
   const [loading, setLoading] = useState(true);
+
+  const handleJunglePlacement = useCallback(() => {
+    if (jungleRef.current && cardRef.current) {
+      const topPosition = cardRef.current.getBoundingClientRect().top;
+      jungleRef.current.style.top = `${topPosition - 64}px`;
+    }
+  }, []);
 
   const handleCreateRef = useCallback(
     (node: HTMLDivElement | null, type: string) => {
@@ -18,12 +29,9 @@ const Home = () => {
       if (type === "jungle") {
         jungleRef.current = node;
       }
-      if (jungleRef.current && cardRef.current) {
-        const topPosition = cardRef.current.getBoundingClientRect().top;
-        jungleRef.current.style.top = `${topPosition - 64}px`;
-      }
+      handleJunglePlacement();
     },
-    []
+    [handleJunglePlacement]
   );
 
   const handleCreateImageRef = useCallback(
@@ -39,20 +47,37 @@ const Home = () => {
       loadedRefs.current[name] = true;
       const allLoaded = Object.values(loadedRefs.current).every((v) => v);
       if (allLoaded) {
-        console.log("All images loaded");
         setLoading(false);
       }
     },
     [setLoading]
   );
 
+  const debouncedHandleJunglePlacement = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+    timerRef.current = setTimeout(() => {
+      handleJunglePlacement();
+    }, DEBOUNCE_DELAY);
+  }, [handleJunglePlacement]);
+
+  useEffect(() => {
+    debouncedHandleJunglePlacement();
+    window.addEventListener("resize", debouncedHandleJunglePlacement);
+    return () => {
+      window.removeEventListener("resize", debouncedHandleJunglePlacement);
+    };
+  }, [debouncedHandleJunglePlacement]);
+
   return (
     <div className={styles.home}>
       <div className={styles.content}>
-        <Card
-          ref={(r) => handleCreateRef(r, "card")}
-          opacity={loading ? 0 : 1}
-        />
+        <Card ref={(r) => handleCreateRef(r, "card")} hidden />
+        <AnimatePresence>
+          {!loading && <Card opacity={loading ? 0 : 1} />}
+        </AnimatePresence>
         <div
           ref={(r) => handleCreateRef(r, "jungle")}
           className={styles.jungle}
