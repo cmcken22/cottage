@@ -32,13 +32,14 @@ const Home = () => {
 
   const handleCreateRef = useCallback(
     (node: HTMLDivElement | null, type: string) => {
-      if (type === "card") {
+      if (type === "card" && !cardRef.current) {
         cardRef.current = node;
+        handleJunglePlacement();
       }
-      if (type === "jungle") {
+      if (type === "jungle" && !jungleRef.current) {
         jungleRef.current = node;
+        handleJunglePlacement();
       }
-      handleJunglePlacement();
     },
     [handleJunglePlacement]
   );
