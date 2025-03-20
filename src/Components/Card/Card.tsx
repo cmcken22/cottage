@@ -3,15 +3,22 @@ import styles from "./Card.module.scss";
 import { CardProps } from "./Card.types";
 import cx from "classnames";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ hidden, onAnimationStart }, ref) => {
+    const navigate = useNavigate();
+
     const handleOpenLink = useCallback(() => {
       window.open(
         "https://www.airbnb.ca/rooms/1308860065021844564?guests=1&adults=1&s=67&unique_share_id=88510475-6398-42ae-b095-30be69321ce7",
         "_blank"
       );
     }, []);
+
+    const navigateToTerms = useCallback(() => {
+      navigate("/terms");
+    }, [navigate]);
 
     return (
       <motion.div
@@ -46,6 +53,9 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         <button className={styles.button} onClick={handleOpenLink}>
           View Listing
         </button>
+        <a className={styles.link} onClick={navigateToTerms}>
+          Terms & Conditions
+        </a>
       </motion.div>
     );
   }
