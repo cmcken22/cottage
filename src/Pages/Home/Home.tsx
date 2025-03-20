@@ -67,9 +67,8 @@ const Home = () => {
     if (!contentRef.current) return;
     if (prevWindowWidth.current === window.innerWidth) return;
     prevWindowWidth.current = window.innerWidth;
-    console.log("checkLargeScreen");
     const contentWidth = contentRef.current.getBoundingClientRect().width;
-    const screenWidth = window.screen.width;
+    const screenWidth = window.innerWidth;
     if (screenWidth > contentWidth) {
       console.log("too big!!!!!!", screenWidth, contentWidth);
     }
@@ -122,28 +121,18 @@ const Home = () => {
     };
   }, [debouncedLargeScreenCheck]);
 
-  const contentWidth = contentRef?.current?.getBoundingClientRect()?.width || 0;
-  const screenWidth = window?.screen?.width || 0;
-  const lg = window.innerWidth > contentWidth;
-
   return (
     <>
       <div
         className={cx(styles.home, {
-          [styles["home--large"]]: lg,
+          [styles["home--large"]]: largeScreen,
         })}
       >
-        <div className={styles.debug}>
-          <p>contentWidth: {contentWidth}</p>
-          <p>screenWidth: {screenWidth}</p>
-          <p>innerWidth: {window.innerWidth}</p>
-          <p>largeScreen: {largeScreen ? "true" : "false"}</p>
-        </div>
         {allowFireworks && <Fireworks loop />}
         <div
           ref={handleCreateContentRef}
           className={cx(styles.content, {
-            [styles["content--large"]]: lg,
+            [styles["content--large"]]: largeScreen,
           })}
         >
           <Card ref={(r) => handleCreateRef(r, "card")} hidden />

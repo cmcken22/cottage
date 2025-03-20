@@ -4,6 +4,7 @@ import { CardProps } from "./Card.types";
 import cx from "classnames";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import Button from "@components/Button";
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ hidden, onAnimationStart }, ref) => {
@@ -42,18 +43,21 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
           [styles["card--hidden"]]: hidden,
         })}
       >
-        <h1 className={styles.text}>Congrats!!!</h1>
+        <h1 className={cx(styles.text, styles.title, styles.bold)}>
+          Congrats!
+        </h1>
         <div>
-          <p className={styles.text}>You've unlocked 10% off our condo in</p>
-          <p className={styles.text}>Tulum, Mexico!!</p>
+          <p className={styles.text}>
+            You've unlocked <span className={styles.bold}>10% off</span> our
+            condo in
+          </p>
+          <p className={cx(styles.text, styles.bold)}>Tulum, Mexico!!</p>
         </div>
 
         <div className={styles.flag} />
 
-        <button className={styles.button} onClick={handleOpenLink}>
-          View Listing
-        </button>
-        <a className={styles.link} onClick={navigateToTerms}>
+        <Button onClick={handleOpenLink}>View Listing</Button>
+        <a className={cx(styles.text, styles.link)} onClick={navigateToTerms}>
           Terms & Conditions
         </a>
       </motion.div>

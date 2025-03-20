@@ -1,5 +1,5 @@
 .card {
-  @apply rounded-lg p-2;
+  @apply rounded-lg py-2 px-5;
   @apply m-4;
   @apply min-h-[500px];
   @apply flex flex-col gap-4;
@@ -9,16 +9,23 @@
 
   .text {
     @apply text-center;
+    font-family: "Red Hat Display", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 24px;
   }
 
-  .button {
-    @apply w-fit p-1 rounded-sm;
-    @apply ml-auto mr-auto mt-[24px];
-    background: #88a799;
+  .bold {
+    font-weight: bold;
+  }
+  
+  .title {
+    font-size: 2.5rem;
   }
 
   .link {
     @apply ml-auto mr-auto mt-[24px];
+    font-size: 16px;
   }
 
   .flag {
