@@ -121,14 +121,15 @@ const Home = () => {
     };
   }, [debouncedLargeScreenCheck]);
 
-  const contentWidth = contentRef?.current?.getBoundingClientRect()?.width;
-  const screenWidth = window?.screen?.width;
+  const contentWidth = contentRef?.current?.getBoundingClientRect()?.width || 0;
+  const screenWidth = window?.screen?.width || 0;
+  const lg = screenWidth > contentWidth;
 
   return (
     <>
       <div
         className={cx(styles.home, {
-          [styles["home--large"]]: largeScreen,
+          [styles["home--large"]]: lg,
         })}
       >
         <div className={styles.debug}>
@@ -140,7 +141,7 @@ const Home = () => {
         <div
           ref={handleCreateContentRef}
           className={cx(styles.content, {
-            [styles["content--large"]]: largeScreen,
+            [styles["content--large"]]: lg,
           })}
         >
           <Card ref={(r) => handleCreateRef(r, "card")} hidden />
