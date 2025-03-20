@@ -45,6 +45,11 @@
     }
   }
 
+  .fireworks {
+    z-index: 1000;
+    @apply absolute top-0 left-0 right-0 bottom-0;
+  }
+
   .jungle {
     // background: rgba(255, 0, 255, 0.4);
     @apply absolute top-[18%] left-0 right-0 bottom-0;
