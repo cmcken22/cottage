@@ -2,17 +2,19 @@ import FireworkAnimation from "react-canvas-confetti/dist/presets/fireworks";
 import { useWindowSize } from "react-use";
 import styles from "./Fireworks.module.scss";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { FireworksProps } from "./Fireworks.types";
 
 const DELAY = 500;
 const DURATION = 2000;
 const CYCLE_DELAY = 1000 * 10;
 
-const Fireworks = () => {
+const Fireworks = ({ loop }: FireworksProps) => {
   const [key, setKey] = useState(0);
   const { width, height } = useWindowSize();
   const timerRef = useRef<NodeJS.Timeout>(null);
 
   const handleCycle = useCallback(() => {
+    if (!loop) return;
     if (timerRef.current) {
       clearTimeout(timerRef.current);
       timerRef.current = null;
@@ -23,7 +25,7 @@ const Fireworks = () => {
         handleCycle();
       }, CYCLE_DELAY);
     }, DELAY + DURATION);
-  }, []);
+  }, [loop]);
 
   useEffect(() => {
     handleCycle();

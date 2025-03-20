@@ -1,4 +1,4 @@
 export interface CardProps {
-  opacity?: number;
   hidden?: boolean;
+  onAnimationStart?: () => void;
 }
