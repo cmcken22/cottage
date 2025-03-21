@@ -6,6 +6,8 @@
   flex: 1;
   background-color: #f5f5dc;
   box-shadow: 0px 0px 10px rgba(145, 145, 145, 0.7);
+  background-color: #e3d9b6; /* Sandy base color */
+  background-image: url('https://www.transparenttextures.com/patterns/sandpaper.png'); /* Sand texture */
 
   .text {
     @apply text-center;

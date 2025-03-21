@@ -5,6 +5,7 @@ import cx from "classnames";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Button from "@components/Button";
+import FancyText from "@components/FancyText";
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ hidden, onAnimationStart }, ref) => {
@@ -43,9 +44,10 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
           [styles["card--hidden"]]: hidden,
         })}
       >
-        <h1 className={cx(styles.text, styles.title, styles.bold)}>
+        {/* <h1 className={cx(styles.text, styles.title, styles.bold)}>
           Congrats!
-        </h1>
+        </h1> */}
+        <FancyText>Congrats!</FancyText>
         <div>
           <p className={styles.text}>
             You've unlocked <span className={styles.bold}>10% off</span> our

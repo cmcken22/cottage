@@ -1,0 +1,21 @@
+.fancyText {
+  @apply relative w-fit ml-auto mr-auto;
+
+  .text, .dropText {
+    @apply text-7xl;
+    text-align: center;
+    font-family: "Praise", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .text {
+    color: white;
+    @apply relative z-10;
+  }
+  .dropText {
+    // color: #77F4FB;
+    color: #EB5471;
+    @apply absolute top-[1px] left-[-2px] z-0;
+  }
+}
