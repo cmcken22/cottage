@@ -27,7 +27,7 @@ const Home = () => {
   const handleJunglePlacement = useCallback(() => {
     if (jungleRef.current && cardRef.current) {
       const topPosition = cardRef.current.getBoundingClientRect().top;
-      jungleRef.current.style.top = `${topPosition - 64}px`;
+      jungleRef.current.style.top = `${topPosition - 40}px`;
     }
   }, []);
 
