@@ -6,7 +6,7 @@ import cx from "classnames";
 const FancyText = ({ children }: FancyTextProps) => {
   const query = useQuery();
   const blackMode = query.get("black") === "true";
-  console.log("blackMode:", blackMode);
+
   return (
     <div
       className={cx(styles.fancyText, {

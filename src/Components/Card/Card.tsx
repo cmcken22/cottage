@@ -6,10 +6,13 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Button from "@components/Button";
 import FancyText from "@components/FancyText";
+import { useQuery } from "@hooks/index";
 
 const Card = forwardRef<HTMLDivElement, CardProps>(
   ({ hidden, onAnimationStart }, ref) => {
     const navigate = useNavigate();
+    const query = useQuery();
+    const blackMode = query.get("black") === "true";
 
     const handleOpenLink = useCallback(() => {
       window.open(
@@ -42,6 +45,8 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
         }}
         className={cx(styles.card, {
           [styles["card--hidden"]]: hidden,
+          [styles["card--black"]]: blackMode,
+          [styles["card--not-black"]]: !blackMode,
         })}
       >
         {/* <h1 className={cx(styles.text, styles.title, styles.bold)}>
