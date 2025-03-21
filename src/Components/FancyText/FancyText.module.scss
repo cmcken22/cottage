@@ -10,21 +10,12 @@
   }
 
   .text {
-    color: white;
     @apply relative z-10;
+    color: black;
   }
   .dropText {
-    // color: #77F4FB;
-    color: #EB5471;
     @apply absolute top-[1px] left-[-2px] z-0;
-  }
-
-  &--black {
-    .text {
-      color: black;
-    }
-    .dropText {
-      display: none;
-    }
+    color: #EB5471;
+    display: none;
   }
 }
